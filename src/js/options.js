@@ -30,32 +30,30 @@ export default (options) => {
   }
 
   // baseUrl
-  if (!options.hasOwnProperty("baseUrl") || options.baseUrl == "") {
-    console.error("sim-captcha-js: 你必须设置baseUrl");
-  }
-  // 去掉末尾 "/"
-  if (options.baseUrl[options.baseUrl.length - 1] == "/") {
-    options.baseUrl = options.baseUrl.substr(0, options.baseUrl.length - 1);
-  }
+  if (options.hasOwnProperty("baseUrl") && options.baseUrl != "") {
+    // 去掉末尾 "/"
+    if (options.baseUrl[options.baseUrl.length - 1] == "/") {
+      options.baseUrl = options.baseUrl.substr(0, options.baseUrl.length - 1);
+    }
 
-  // imgUrl 拼接成绝对url
-  if (options.imgUrl.indexOf("http") != 0) {
-    // 相对路径
-    if (options.imgUrl.indexOf("/") != 0) {
-      options.imgUrl = options.baseUrl + "/" + options.imgUrl;
-    } else {
-      options.imgUrl = options.baseUrl + options.imgUrl;
+    // imgUrl 拼接成绝对url
+    if (options.imgUrl.indexOf("http") != 0) {
+      // 相对路径
+      if (options.imgUrl.indexOf("/") != 0) {
+        options.imgUrl = options.baseUrl + "/" + options.imgUrl;
+      } else {
+        options.imgUrl = options.baseUrl + options.imgUrl;
+      }
+    }
+    // checkUrl 拼接成绝对url
+    if (options.checkUrl.indexOf("http") != 0) {
+      // 相对路径
+      if (options.checkUrl.indexOf("/") != 0) {
+        options.checkUrl = options.baseUrl + "/" + options.checkUrl;
+      } else {
+        options.checkUrl = options.baseUrl + options.checkUrl;
+      }
     }
   }
-  // checkUrl 拼接成绝对url
-  if (options.checkUrl.indexOf("http") != 0) {
-    // 相对路径
-    if (options.checkUrl.indexOf("/") != 0) {
-      options.checkUrl = options.baseUrl + "/" + options.checkUrl;
-    } else {
-      options.checkUrl = options.baseUrl + options.checkUrl;
-    }
-  }
-
   return options;
 };

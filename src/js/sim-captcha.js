@@ -304,6 +304,7 @@ function getImgSize() {
   return { width, height };
 }
 
+
 /**
  * 获取点击位置(相对于图片的相对位置)(px)
  * @param obj 事实上始终为验证码图片元素
@@ -412,7 +413,9 @@ function init() {
   document.body.insertAdjacentHTML("beforeend", htmlLayer);
 
   // 绑定点击事件
-  _element.onclick = show;
+
+  if (_element != null && _element != undefined)
+    _element.onclick = show;
 
   document.getElementById("simCaptcha-btn-close").onclick = hidden;
 
@@ -421,6 +424,12 @@ function init() {
   document.getElementById("simCaptcha-btn-confirm").onclick = sendVCodePos;
 
   document.getElementById("simCaptcha-img").onclick = imgClick;
+}
+
+function setOptions(appid, img, action) {
+  _appId = appid;
+  _reqVCodeImgUrl = img;
+  _reqVCodeCheckUrl = action;
 }
 
 function SimCaptcha(options) {
@@ -438,6 +447,7 @@ function SimCaptcha(options) {
 SimCaptcha.prototype = {
   constructor: SimCaptcha,
 
+  setOptions: setOptions,
   /***
    * 显示验证码
    */
